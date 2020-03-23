@@ -1,0 +1,16 @@
+# /etc/systemd/system/iptables.service
+[Unit]
+Description=Packet Filtering Framework
+Before=network-pre.target
+Wants=network-pre.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/iptables.sh start
+#ExecStartPost=/usr/local/sbin/iptables-after.sh
+ExecReload=/usr/local/sbin/iptables.sh restart
+ExecStop=/usr/local/sbin/iptables.sh stop
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
