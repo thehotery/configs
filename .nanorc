@@ -1,8 +1,8 @@
-# just simple settings
+# just simple settings; to use in older versions of nano, comment out lines with ends with #
 
-set atblanks
+set atblanks # 
 set boldtext
-set constantshow
+set constantshow # set const  -- for older version
 set linenumbers
 set mouse
 set noconvert
@@ -21,4 +21,4 @@ set numbercolor cyan
 set keycolor cyan
 set functioncolor green
 
-include "/usr/share/nano/*.nanorc"
+include "/usr/share/nano/*.nanorc" # for older version specify each file in separate line...
