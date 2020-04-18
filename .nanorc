@@ -1,4 +1,5 @@
 # just simple settings; to use in older versions of nano, comment out lines with ends with #
+# place it in  ~/.config/nano/nanorc or ~/.nanorc
 
 set atblanks # 
 set boldtext
