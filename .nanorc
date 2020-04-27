@@ -23,3 +23,4 @@ set keycolor cyan
 set functioncolor green
 
 include "/usr/share/nano/*.nanorc" # for older version specify each file in separate line...
+# include "/usr/local/Cellar/nano/*/share/nano/*.nanorc" # for mac os x -  package from brew
