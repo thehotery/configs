@@ -4,8 +4,8 @@
 set atblanks # 
 set boldtext
 set constantshow # set const  -- for older version
-set linenumbers
-set mouse
+set linenumbers # controversal, disable if want to copy text from terminal window
+set mouse # controlversal, disable if want to select text with mouse
 set noconvert
 set nohelp
 set nowrap
