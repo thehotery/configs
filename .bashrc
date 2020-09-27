@@ -142,7 +142,7 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias ls='ls --color=auto'
 alias ip='ip -c'
-alias listdisk='lsblk -o NAME,FSTYPE,MOUNTPOINT,LABEL,PARTLABEL,MODEL,UUID'
+alias lsblk='lsblk -o NAME,FSTYPE,MOUNTPOINT,LABEL,PARTLABEL,MODEL,UUID'
 alias mountfs='mount | grep -vE "fusectl|gvfsd-fuse|hugetlbfs|cgroup|autofs|sysfs|devtmpfs|efivarfs|securityfs|devpts|pstore|bpf|mqueue|debugfs|binfmt_misc|configfs|proc|/run|/dev/shm"'
 
 alias extip='curl -4 http://icanhazip.com'
