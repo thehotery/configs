@@ -1,4 +1,8 @@
-   # Enable mouse scrolling and scroll bar history scrolling
+###### COMMENT
+###### its for personal usage maily; it's too hard to remember all those lines
+###### i'm dont remember (and dont very want to search) where i'm find some parts..  
+  
+  # Enable mouse scrolling and scroll bar history scrolling
   termcapinfo xterm* ti@:te@
  
   # skip the startup message
