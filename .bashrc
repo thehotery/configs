@@ -84,7 +84,16 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-############## USE COLORS ############################
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+###  COLORS (these things should be harmless..)
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
@@ -112,19 +121,9 @@ else
 fi
 unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
-
 
 # Turn on 256 color support...
 if [ "x$TERM" = "xxterm" ]
@@ -132,7 +131,6 @@ then
     export TERM="xterm-256color"
 fi
 
-###  COLORS: BEGIN
 alias ls='ls --color=auto'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
@@ -144,12 +142,18 @@ alias ip='ip -c'
             # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
+## CHANGE SOME BEHAVIOUR (not always convinient, check it)
+alias cp='cp -v' ## verbose output of cp, maybe too many lines but no way to change it...
+alias mv='mv -v' ## verbose output of mv, same...
+alias rm='rm -v -i' ## verbose output of rm AND -i ask on every file or -I if more then 3 file
+
 
 ### CHANGE OUTPUT OF SOME COMMANDS: BEGIN
   # (see also aliases for color above, cant be two aliases!)
 alias lsblk='lsblk -o NAME,FSTYPE,MOUNTPOINT,LABEL,PARTLABEL,MODEL,UUID' ## more detailed output
 alias dig='dig +nocmd +multiline +noall +answer' ## use drill instead!!!
 alias mountfs='mount | grep -vE "fusectl|gvfsd-fuse|hugetlbfs|cgroup|autofs|sysfs|devtmpfs|efivarfs|securityfs|devpts|pstore|bpf|mqueue|debugfs|binfmt_misc|configfs|proc|/run|/dev/shm"'
+
 
 
 ################ ADD SHORTCUTS ######################
