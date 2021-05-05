@@ -132,8 +132,7 @@ then
     export TERM="xterm-256color"
 fi
 
-######### COLORS
-
+###  COLORS: BEGIN
 alias ls='ls --color=auto'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
@@ -142,27 +141,41 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias ls='ls --color=auto'
 alias ip='ip -c'
-alias lsblk='lsblk -o NAME,FSTYPE,MOUNTPOINT,LABEL,PARTLABEL,MODEL,UUID'
-alias mountfs='mount | grep -vE "fusectl|gvfsd-fuse|hugetlbfs|cgroup|autofs|sysfs|devtmpfs|efivarfs|securityfs|devpts|pstore|bpf|mqueue|debugfs|binfmt_misc|configfs|proc|/run|/dev/shm"'
-
-alias extip='curl -4 http://icanhazip.com'
-
-# colored GCC warnings and errors
+            # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
+
+### CHANGE OUTPUT OF SOME COMMANDS: BEGIN
+  # (see also aliases for color above, cant be two aliases!)
+alias lsblk='lsblk -o NAME,FSTYPE,MOUNTPOINT,LABEL,PARTLABEL,MODEL,UUID' ## more detailed output
+alias dig='dig +nocmd +multiline +noall +answer' ## use drill instead!!!
+alias mountfs='mount | grep -vE "fusectl|gvfsd-fuse|hugetlbfs|cgroup|autofs|sysfs|devtmpfs|efivarfs|securityfs|devpts|pstore|bpf|mqueue|debugfs|binfmt_misc|configfs|proc|/run|/dev/shm"'
+
+
+################ ADD SHORTCUTS ######################
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+
+################ ADD SOME FINCTIONALITY ################
+alias extip='curl -4 http://icanhazip.com'
+alias psgrep='ps aux | grep -v "grep" | grep'
+alias checkfat='dosfsck -w -r -l -a -v -t'
+alias genpass='</dev/urandom tr -dc 'a-zA-Z0-9' | fold -w 12 | head -n 1'
+
+
+
+# FOR GUI ONLY
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+## alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+##export MC_XDG_OPEN=~/.bin/nohup-open
+
+
+#export QT_QPA_PLATFORMTHEME=“qt5ct”
+
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -175,21 +188,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
-####################### ALIASES ####################
-alias psgrep='ps aux | grep -v "grep" | grep'
-alias checkfat='dosfsck -w -r -l -a -v -t'
-alias genpass='</dev/urandom tr -dc 'a-zA-Z0-9' | fold -w 12 | head -n 1'
-alias dig='dig +nocmd +multiline +noall +answer' ## use drill instead!!!
 
 ################ USEFUL FUNCTIONS ######################
-
-conky() {
-	if [ "$1" == "-e" ]; then
-		nano ~/.conkyrc
-	 else
-		command conky "$@"
-	fi
-}
 
 UtfToAscii() {
 	if [ "$#" -eq 2 ] && [ -f "$1" ] && [ -w "$2"]; then
@@ -250,34 +250,13 @@ catdir() {
     done
 }
 
-### VIRTUAL BOX -- BEGIN
-alias startvm='vboxmanage startvm --type headless'
-
-[[ "$PATH" == *"Windows"* ]] &&  alias vboxmanage="/mnt/c/Program\ Files/Oracle/VirtualBox/vboxmanage.exe"
-
-alias startvm='vboxmanage startvm --type headless'
-
-stopvm() {
-	vboxmanage controlvm "$1" acpipowerbutton && echo "Machine stopping"
-}
-
-savevm() {
-	vboxmanage controlvm "$1" savestate && echo "Machine saving its state"
-}
-
-### VIRTUAL BOX -- END
 
 
-export MC_XDG_OPEN=~/.bin/nohup-open
 
-
-#export QT_QPA_PLATFORMTHEME=“qt5ct”
-
-#
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-  eval `ssh-agent -s` >/dev/null
-#  ssh-add
-#  ssh-add - < ~/.ssh/vps
-fi
+# SSH AGENT
+## if [ -z "$SSH_AUTH_SOCK" ] ; then
+## eval `ssh-agent -s` >/dev/null
+#  ssh-add - < ~/.ssh/my_key
+## fi
 
 
